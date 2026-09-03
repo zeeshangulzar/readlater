@@ -1,0 +1,11 @@
+<p>Hi there,</p>
+
+<p><%= @from_user.email %> thought you'd like this article and saved it to Readlater:</p>
+
+<p><strong><%= link_to @article.title, @article.url %></strong></p>
+
+<% if @message.present? %>
+  <blockquote><%= simple_format(@message) %></blockquote>
+<% end %>
+
+<p>— Readlater</p>

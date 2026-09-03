@@ -1,7 +1,9 @@
 require "sidekiq/web"
 
 Rails.application.routes.draw do
-  resources :articles
+  resources :articles do
+    resource :share, only: [:create], controller: "article_shares"
+  end
   devise_for :users
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
   if Rails.env.local?
