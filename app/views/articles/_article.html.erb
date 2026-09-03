@@ -1,0 +1,7 @@
+<article id="<%= dom_id article %>">
+  <h3><%= link_to article.title, article.url, target: "_blank", rel: "noopener" %></h3>
+  <p class="meta">Saved <%= time_ago_in_words(article.created_at) %> ago</p>
+  <% if article.notes.present? %>
+    <p><%= article.notes %></p>
+  <% end %>
+</article>

@@ -1,0 +1,20 @@
+<h1>Your reading list</h1>
+
+<p><%= link_to "Save an article", new_article_path %></p>
+
+<% if @articles.any? %>
+  <div id="articles">
+    <% @articles.each do |article| %>
+      <%= render article %>
+      <p>
+        <%= link_to "Details", article %>
+        &middot;
+        <%= link_to "Edit", edit_article_path(article) %>
+        &middot;
+        <%= button_to "Remove", article, method: :delete, data: { turbo_confirm: "Remove this article?" } %>
+      </p>
+    <% end %>
+  </div>
+<% else %>
+  <p>Nothing saved yet. Paste in a URL to get started.</p>
+<% end %>
