@@ -20,6 +20,9 @@ Bundler.require(*Rails.groups)
 
 module Readlater
   class Application < Rails::Application
+    config.require_master_key = true
+    config.active_record.strict_loading_by_default = true
+    config.active_job.queue_adapter = :sidekiq
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 7.1
 

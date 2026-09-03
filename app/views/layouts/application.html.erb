@@ -1,7 +1,8 @@
 <!DOCTYPE html>
-<html>
+<html lang="<%= I18n.locale %>">
   <head>
     <title>Readlater</title>
+    <meta name="turbo-prefetch" content="false">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
@@ -11,6 +12,9 @@
   </head>
 
   <body>
-    <%= yield %>
+    <main>
+      <%= render "flashes" %>
+      <%= yield %>
+    </main>
   </body>
 </html>
