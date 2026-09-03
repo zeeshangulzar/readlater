@@ -1,0 +1,12 @@
+Hi there,
+
+<%= @from_user.email %> thought you'd like this article and saved it to Readlater:
+
+  <%= @article.title %>
+  <%= @article.url %>
+
+<% if @message.present? -%>
+<%= @message %>
+
+<% end -%>
+— Readlater

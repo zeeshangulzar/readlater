@@ -3,8 +3,23 @@
 <%= render @article %>
 
 <div>
-  <%= link_to "Edit this article", edit_article_path(@article) %> |
-  <%= link_to "Back to articles", articles_path %>
-
-  <%= button_to "Destroy this article", @article, method: :delete %>
+  <%= link_to "Edit", edit_article_path(@article) %> |
+  <%= link_to "Back", articles_path %>
+  <%= button_to "Remove", @article, method: :delete, data: { turbo_confirm: "Remove this article?" } %>
 </div>
+
+<hr>
+
+<h2>Share with a friend</h2>
+
+<%= form_with url: article_share_path(@article), method: :post do |form| %>
+  <div>
+    <%= form.label :to_email, "Their email", style: "display: block" %>
+    <%= form.email_field :to_email, required: true %>
+  </div>
+  <div>
+    <%= form.label :message, "Optional note", style: "display: block" %>
+    <%= form.text_area :message, rows: 3 %>
+  </div>
+  <%= form.submit "Send invitation" %>
+<% end %>
