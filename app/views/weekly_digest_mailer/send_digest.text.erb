@@ -1,0 +1,14 @@
+Hi <%= @user.email %>,
+
+<% if @articles.any? -%>
+Here's what you saved since <%= @since.to_date %>:
+
+<% @articles.each do |article| -%>
+- <%= article.title %>
+  <%= article.url %>
+<% end -%>
+<% else -%>
+You didn't save anything this week. Nothing to catch up on — nice.
+<% end -%>
+
+— Readlater
