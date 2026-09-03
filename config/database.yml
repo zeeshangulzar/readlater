@@ -79,6 +79,4 @@ test:
 #
 production:
   <<: *default
-  database: readlater_production
-  username: readlater
-  password: <%= ENV["READLATER_DATABASE_PASSWORD"] %>
+  url: <%= ENV["DATABASE_URL"] %>
