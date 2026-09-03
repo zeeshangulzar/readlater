@@ -60,6 +60,7 @@ group :development do
   # gem "spring"
 end
 
+gem "devise"
 gem "inline_svg"
 gem "sidekiq"
 gem "strong_migrations"
