@@ -1,14 +1,45 @@
-# README
+# Readlater
 
-This application was initially generated with [Suspenders][].
+Save articles, read them later, get a weekly digest by email.
+
+A small Rails side project I use as my personal reading queue. Also a decent testbed for anything that touches ActionMailer — it sends mail from three different contexts:
+
+- Devise confirmation on signup (Rails process)
+- Share-with-a-friend notification via Sidekiq
+- Weekly digest via a rake task
+
+Initially generated with [Suspenders][].
 
 [Suspenders]: https://github.com/thoughtbot/suspenders
 
-## Local Development
+## Local development
 
-Run `bin/dev` to start the web server and Sidekiq worker. Then, navigate to [http://localhost:3000][local]
+Run `bin/dev` to start the web server and Sidekiq worker, then open [http://localhost:3000][local].
 
 [local]: http://localhost:3000
+
+## Local email testing
+
+Emails are delivered to [mailtrap-local][mtl] over real SMTP on `127.0.0.1:3535`. Browse the inbox at [http://127.0.0.1:3550](http://127.0.0.1:3550).
+
+One-time setup:
+
+```sh
+brew tap mailtrap/local
+brew install mailtrap-local
+brew services start mailtrap-local
+```
+
+Optional overrides:
+
+- `SMTP_ADDRESS` (default `127.0.0.1`)
+- `SMTP_PORT` (default `3535`)
+
+![mailtrap-local inbox with confirmation, share, and digest emails](docs/inbox.png)
+
+Why real SMTP and not `letter_opener` / `letter_opener_web`? Both plug in as an ActionMailer `delivery_method`, so the SMTP client, encoding, and TLS layers never actually run in development. mailtrap-local speaks real SMTP, so `development` exercises the same delivery path `production` will — and it catches mail from every process pointed at it (Rails, Sidekiq worker, rake tasks) with one config.
+
+[mtl]: https://github.com/mailtrap/mailtrap-local
 
 ### Strong Migrations
 
@@ -66,11 +97,9 @@ This configuration helps prevent accidental data modifications in production.
 ### All Environments
 
 - Enables [strict_loading_by_default][].
-- Sets [strict_loading_mode][] to `:n_plus_one`.
 - Enables [require_master_key][].
 
 [strict_loading_by_default]: https://guides.rubyonrails.org/configuring.html#config-active-record-strict-loading-by-default
-[strict_loading_mode]: https://guides.rubyonrails.org/configuring.html#config-active-record-strict-loading-mode
 [require_master_key]: https://guides.rubyonrails.org/configuring.html#config-require-master-key
 
 ### Test
