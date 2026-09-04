@@ -55,6 +55,7 @@ group :development do
 
   # Preview outgoing mail in the browser during development
   gem "letter_opener"
+  gem "letter_opener_web"
 
   # Add speed badges [https://github.com/MiniProfiler/rack-mini-profiler]
   # gem "rack-mini-profiler"
