@@ -37,7 +37,7 @@ Optional overrides:
 
 ![mailtrap-local inbox with confirmation, share, and digest emails](docs/inbox.png)
 
-Why real SMTP and not `letter_opener` / `letter_opener_web`? Both plug in as an ActionMailer `delivery_method`, so the SMTP client, encoding, and TLS layers never actually run in development. mailtrap-local speaks real SMTP, so `development` exercises the same delivery path `production` will — and it catches mail from every process pointed at it (Rails, Sidekiq worker, rake tasks) with one config.
+Bit of background on the swap: both `letter_opener` flavors plug in as an ActionMailer `delivery_method`, so the SMTP client, encoding, and TLS layers never actually run in development. `mailtrap-local` speaks real SMTP on the same host/port pattern the app uses in production, and it catches mail from every process pointed at it (Rails, Sidekiq worker, rake tasks) with one config.
 
 [mtl]: https://github.com/mailtrap/mailtrap-local
 
